@@ -100,7 +100,7 @@ class _ProductInventoryState extends State<ProductInventory> {
                           Expanded(child: ElevatedButton(child: const Icon(Icons.add), onPressed: () {setState(() {
                             _lstItem[index] = _lstItem[index].copyWith(qty: _lstItem[index].qty+1);
                           });},),),
-                          Expanded(child: ElevatedButton(child: Icon(Icons.edit), onPressed: () {setState(() {
+                          Expanded(child: ElevatedButton(child: const Icon(Icons.edit), onPressed: () {setState(() {
                             isEditing = !isEditing;
                           });},),),
                         ],
