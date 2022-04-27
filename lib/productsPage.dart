@@ -36,6 +36,14 @@ class _ProductInventoryState extends State<ProductInventory> {
   ];
   final _lstBoissons = <Item>[Item(name: "Eau", qty: 3), Item(name: "Cidre", qty: 5)];
   var _lstItem = <Item>[];
+  bool isEditing = false;
+  TextEditingController? _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = TextEditingController(text: "Test");
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,11 +74,16 @@ class _ProductInventoryState extends State<ProductInventory> {
                   return Card(
                     child: Column(children: [
                       Expanded(
-                        child: Text(
+                        child: !isEditing ? Text(
                           _lstItem[index].name,
                           style: const TextStyle(
                               fontSize: 32.0, fontWeight: FontWeight.bold),
                           textAlign: TextAlign.left,
+                        ) : TextField(
+                          controller: _controller,
+                          onSubmitted: (String value) async {setState(() {
+                            _lstItem[index] = _lstItem[index].copyWith(name: value);
+                          });},
                         ),
                       ),
                       Expanded(
@@ -87,7 +100,9 @@ class _ProductInventoryState extends State<ProductInventory> {
                           Expanded(child: ElevatedButton(child: const Icon(Icons.add), onPressed: () {setState(() {
                             _lstItem[index] = _lstItem[index].copyWith(qty: _lstItem[index].qty+1);
                           });},),),
-                          const Expanded(child: Icon(Icons.edit)),
+                          Expanded(child: ElevatedButton(child: Icon(Icons.edit), onPressed: () {setState(() {
+                            isEditing = !isEditing;
+                          });},),),
                         ],
                         mainAxisAlignment: MainAxisAlignment.center,
                       ),
