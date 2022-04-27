@@ -5,7 +5,17 @@ class Item {
   final String name;
   final int qty;
 
-  const Item(this.name, this.qty);
+  Item({required this.name, required this.qty});
+
+  Item copyWith({
+  String? name,
+  int? qty,
+}) {
+  return Item(
+    name: name ?? this.name,
+    qty: qty ?? this.qty,
+  );
+}
 }
 
 class ProductInventory extends StatefulWidget {
@@ -20,11 +30,11 @@ class ProductInventory extends StatefulWidget {
 
 class _ProductInventoryState extends State<ProductInventory> {
   final _lstPeluche = <Item>[
-    const Item("Ours", 4),
-    const Item("Loup", 1),
-    const Item("Otarie", 2)
+    Item(name: "Ours", qty: 4),
+    Item(name: "Loup", qty: 1),
+    Item(name: "Otarie", qty: 2)
   ];
-  final _lstBoissons = <Item>[const Item("Eau", 3), const Item("Cidre", 5)];
+  final _lstBoissons = <Item>[Item(name: "Eau", qty: 3), Item(name: "Cidre", qty: 5)];
   var _lstItem = <Item>[];
 
   @override
@@ -70,10 +80,14 @@ class _ProductInventoryState extends State<ProductInventory> {
                         ),
                       ),
                       Row(
-                        children: const [
-                          Expanded(child: Icon(Icons.remove)),
-                          Expanded(child: Icon(Icons.add)),
-                          Expanded(child: Icon(Icons.edit)),
+                        children: [
+                          Expanded(child: ElevatedButton(child: const Icon(Icons.remove), onPressed: () {setState((() {
+                            _lstItem[index] = _lstItem[index].copyWith(qty: _lstItem[index].qty-1); 
+                          }),);},),),
+                          Expanded(child: ElevatedButton(child: const Icon(Icons.add), onPressed: () {setState(() {
+                            _lstItem[index] = _lstItem[index].copyWith(qty: _lstItem[index].qty+1);
+                          });},),),
+                          const Expanded(child: Icon(Icons.edit)),
                         ],
                         mainAxisAlignment: MainAxisAlignment.center,
                       ),
