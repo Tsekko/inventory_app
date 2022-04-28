@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:inventory_app/productsPage.dart';
-
-class Product {
-  final int id;
-  final String name;
-
-  const Product(this.id, this.name);
-}
+import 'package:inventory_app/inventories_page/inventories_page.dart';
+import 'package:inventory_app/products_page/products_page.dart';
+import 'package:inventory_app/models/product.dart';
 
 void main() {
   runApp(const MyApp());
@@ -44,72 +39,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(),
+      home: const Inventory(),
     );
   }
 }
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  final _catList = <Product>[
-    const Product(1, "Peluches"),
-    const Product(2, "Boissons")
-  ];
-
-  @override
-  Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          "Stock",
-          style: TextStyle(fontSize: 32.0),
-        ),
-        centerTitle: true,
-      ),
-      body: ListView.builder(
-        padding: const EdgeInsets.all(16.0),
-        itemCount: _catList.length,
-        itemBuilder: (context, index) {
-          return Card(
-              child: ListTile(
-            leading: Text(_catList[index].id.toString()),
-            title: Text(_catList[index].name),
-            trailing: const Icon(Icons.chevron_right),
-            onTap: () {
-              Navigator.pushNamed(context, ProductInventory.routeName,
-                  arguments: _catList[index]);
-            },
-          ));
-        },
-      ),
-      floatingActionButton: const FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: _addProduct,
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-    );
-  }
-}
-
-void _addProduct() {}
