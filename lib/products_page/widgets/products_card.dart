@@ -2,9 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:inventory_app/models/item.dart';
 
 class ProductCard extends StatefulWidget {
-  const ProductCard({Key? key, required this.item}) : super(key: key);
+  const ProductCard(
+      {Key? key,
+      required this.item,
+      required this.onItemQuantityUpdated,
+      required this.onItemTitleUpdated})
+      : super(key: key);
 
   final Item item;
+  final Function(int) onItemQuantityUpdated;
+  final Function(String) onItemTitleUpdated;
 
   @override
   State<ProductCard> createState() => _ProductCardState();
@@ -13,15 +20,11 @@ class ProductCard extends StatefulWidget {
 class _ProductCardState extends State<ProductCard> {
   bool isEditing = false;
   TextEditingController? _controller;
-  String title = "";
-  int qty = 0;
 
   @override
   void initState() {
     super.initState();
     _controller = TextEditingController(text: "Test");
-    title = widget.item.name;
-    qty = widget.item.qty;
   }
 
   @override
@@ -31,7 +34,7 @@ class _ProductCardState extends State<ProductCard> {
         Expanded(
           child: !isEditing
               ? Text(
-                  title,
+                  widget.item.name,
                   style: const TextStyle(
                       fontSize: 32.0, fontWeight: FontWeight.bold),
                   textAlign: TextAlign.left,
@@ -39,16 +42,13 @@ class _ProductCardState extends State<ProductCard> {
               : TextField(
                   controller: _controller,
                   onSubmitted: (String value) async {
-                    setState(() {
-                      widget.item.copyWith(name: value);
-                      title = value;
-                    });
+                    widget.onItemTitleUpdated(value);
                   },
                 ),
         ),
         Expanded(
           child: Text(
-            "Quantité : " + qty.toString(),
+            "Quantité : " + widget.item.qty.toString(),
             style: const TextStyle(fontSize: 24.0),
           ),
         ),
@@ -58,12 +58,7 @@ class _ProductCardState extends State<ProductCard> {
               child: ElevatedButton(
                 child: const Icon(Icons.remove),
                 onPressed: () {
-                  setState(
-                    (() {
-                      widget.item.copyWith(qty: qty - 1);
-                      qty = qty - 1;
-                    }),
-                  );
+                  widget.onItemQuantityUpdated(widget.item.qty - 1);
                 },
               ),
             ),
@@ -71,10 +66,7 @@ class _ProductCardState extends State<ProductCard> {
               child: ElevatedButton(
                 child: const Icon(Icons.add),
                 onPressed: () {
-                  setState(() {
-                    widget.item.copyWith(qty: qty + 1);
-                    qty = qty + 1;
-                  });
+                  widget.onItemQuantityUpdated(widget.item.qty + 1);
                 },
               ),
             ),

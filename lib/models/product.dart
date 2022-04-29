@@ -1,6 +1,17 @@
-class Product {
-  final int id;
-  final String name;
+import 'item.dart';
 
-  const Product(this.id, this.name);
+class Product {
+  int id;
+  String name;
+  List<Item> lstItems = [];
+
+  Product({required this.id, required this.name, required this.lstItems});
+
+  Product copyWith({
+    String? name,
+    List<Item>? lstItems,
+  }) {
+    return Product(
+        id: id, name: name ?? this.name, lstItems: lstItems ?? this.lstItems);
+  }
 }

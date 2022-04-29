@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:inventory_app/models/product.dart';
+import 'package:inventory_app/models/item.dart';
 
 import '../products_page/products_page.dart';
 
@@ -21,8 +22,12 @@ class Inventory extends StatefulWidget {
 
 class _InventoryState extends State<Inventory> {
   final _catList = <Product>[
-    const Product(1, "Peluches"),
-    const Product(2, "Boissons")
+    Product(id: 1, name: "Peluches", lstItems: [
+      Item(name: "Ours", qty: 4),
+      Item(name: "Loup", qty: 1),
+      Item(name: "Otarie", qty: 2)
+    ]),
+    Product(id: 2, name: "Boissons", lstItems: [])
   ];
 
   @override
