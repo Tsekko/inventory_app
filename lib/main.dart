@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:inventory_app/inventories_page/inventories_page.dart';
+import 'package:inventory_app/item_form/item_form_page.dart';
+import 'package:inventory_app/models/item.dart';
 import 'package:inventory_app/products_page/products_page.dart';
 import 'package:inventory_app/models/product.dart';
 
@@ -20,6 +22,12 @@ class MyApp extends StatelessWidget {
 
           return MaterialPageRoute(builder: (context) {
             return ProductInventory(product: args);
+          });
+        }
+
+        if (settings.name == ItemFormPage.routeName) {
+          return MaterialPageRoute<Item>(builder: (context) {
+            return const ItemFormPage();
           });
         }
 

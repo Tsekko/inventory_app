@@ -40,7 +40,8 @@ class _ProductCardState extends State<ProductCard> {
                   textAlign: TextAlign.left,
                 )
               : TextField(
-                  controller: _controller,
+                  controller: _controller =
+                      TextEditingController(text: widget.item.name),
                   onSubmitted: (String value) async {
                     widget.onItemTitleUpdated(value);
                   },
@@ -58,7 +59,9 @@ class _ProductCardState extends State<ProductCard> {
               child: ElevatedButton(
                 child: const Icon(Icons.remove),
                 onPressed: () {
-                  widget.onItemQuantityUpdated(widget.item.qty - 1);
+                  if (widget.item.qty > 0) {
+                    widget.onItemQuantityUpdated(widget.item.qty - 1);
+                  }
                 },
               ),
             ),
