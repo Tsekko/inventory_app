@@ -53,7 +53,9 @@ class _ProductInventoryState extends State<ProductInventory> {
           if (item != null) {
             List<Item> lstItem = widget.product.lstItems;
             lstItem.add(item);
-            widget.product.copyWith(lstItems: lstItem);
+            setState(() {
+              widget.product.lstItems = lstItem;
+            });
           }
         },
       ),
