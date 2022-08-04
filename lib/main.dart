@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:inventory_app/inventories_page/inventories_page.dart';
 import 'package:inventory_app/item_form/item_form_page.dart';
 import 'package:inventory_app/models/item.dart';
@@ -6,7 +7,7 @@ import 'package:inventory_app/products_page/products_page.dart';
 import 'package:inventory_app/models/product.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
