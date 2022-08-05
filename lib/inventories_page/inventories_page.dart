@@ -22,12 +22,12 @@ class Inventory extends StatefulWidget {
 
 class _InventoryState extends State<Inventory> {
   final _catList = <Product>[
-    Product(id: 1, name: "Peluches", lstItems: [
+    const Product(id: 1, name: "Peluches", lstItems: [
       Item(name: "Ours", qty: 4),
       Item(name: "Loup", qty: 1),
       Item(name: "Otarie", qty: 2)
     ]),
-    Product(id: 2, name: "Boissons", lstItems: [])
+    const Product(id: 2, name: "Boissons", lstItems: [])
   ];
 
   @override

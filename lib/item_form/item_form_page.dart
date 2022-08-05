@@ -11,7 +11,7 @@ class ItemFormPage extends StatefulWidget {
 
 class _FormPageState extends State<ItemFormPage> {
   final _formKey = GlobalKey<FormState>();
-  Item newItem = Item(name: "", qty: 0);
+  Item newItem = const Item(name: "", qty: 0);
 
   @override
   Widget build(BuildContext context) {

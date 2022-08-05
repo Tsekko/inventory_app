@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         if (settings.name == ProductInventory.routeName) {
           final args = settings.arguments as Product;
 
-          return MaterialPageRoute(builder: (context) {
+          return MaterialPageRoute<dynamic>(builder: (context) {
             return ProductInventory(product: args);
           });
         }

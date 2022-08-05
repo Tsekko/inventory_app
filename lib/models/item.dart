@@ -1,8 +1,11 @@
-class Item {
-  String name;
-  int qty;
+import 'package:flutter/cupertino.dart';
 
-  Item({required this.name, required this.qty});
+@immutable
+class Item {
+  final String name;
+  final int qty;
+
+  const Item({required this.name, required this.qty});
 
   Item copyWith({
     String? name,

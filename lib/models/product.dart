@@ -1,11 +1,14 @@
+import 'package:flutter/cupertino.dart';
+
 import 'item.dart';
 
+@immutable
 class Product {
-  int id;
-  String name;
-  List<Item> lstItems = [];
+  final int id;
+  final String name;
+  final List<Item> lstItems;
 
-  Product({required this.id, required this.name, required this.lstItems});
+  const Product({required this.id, required this.name, required this.lstItems});
 
   Product copyWith({
     String? name,

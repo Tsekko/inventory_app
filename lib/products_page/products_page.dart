@@ -17,6 +17,15 @@ class ProductInventory extends StatefulWidget {
 class _ProductInventoryState extends State<ProductInventory> {
   final _formKey = GlobalKey<FormState>();
   bool isAdding = false;
+  late Product _product;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _product = widget.product;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,10 +60,10 @@ class _ProductInventoryState extends State<ProductInventory> {
           Item? item = await Navigator.of(context)
               .pushNamed<Item?>(ItemFormPage.routeName);
           if (item != null) {
-            List<Item> lstItem = widget.product.lstItems;
+            List<Item> lstItem = _product.lstItems;
             lstItem.add(item);
             setState(() {
-              widget.product.lstItems = lstItem;
+              _product = _product.copyWith(lstItems: lstItem);
             });
           }
         },

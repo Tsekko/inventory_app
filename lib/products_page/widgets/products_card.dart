@@ -18,7 +18,7 @@ class ProductCard extends StatefulWidget {
 }
 
 class _ProductCardState extends State<ProductCard> {
-  bool isEditing = false;
+  bool _isEditing = false;
   TextEditingController? _controller;
 
   @override
@@ -32,7 +32,7 @@ class _ProductCardState extends State<ProductCard> {
     return Card(
       child: Column(children: [
         Expanded(
-          child: !isEditing
+          child: !_isEditing
               ? Text(
                   widget.item.name,
                   style: const TextStyle(
@@ -78,7 +78,7 @@ class _ProductCardState extends State<ProductCard> {
                 child: const Icon(Icons.edit),
                 onPressed: () {
                   setState(() {
-                    isEditing = !isEditing;
+                    _isEditing = !_isEditing;
                   });
                 },
               ),
